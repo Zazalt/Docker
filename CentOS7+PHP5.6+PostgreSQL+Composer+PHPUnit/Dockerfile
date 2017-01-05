@@ -2,7 +2,8 @@ FROM centos:latest
 
 MAINTAINER Zazalt <https://github.com/Zazalt>
 
-RUN echo -e "\033[1;34m- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\t Starting...\n\033[0m"
+RUN echo -e "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+RUN echo -e "\nStarting...\n"
 
 # -----------------------------------------------------------------------------
 # Install Extra Packages for Enterprise Linux (epel)
@@ -78,15 +79,23 @@ RUN chmod +x phpunit.phar
 RUN mv phpunit.phar /usr/local/bin/phpunit
 #RUN phpunit --version
 
-RUN echo -e "\033[1;34m- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\t OS:\n\033[0m"
+RUN echo -e "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+RUN echo -e "\nOS\n"
+
 RUN cat /etc/*-release
 
-RUN echo -e "\033[1;34m- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\t PHP:\n\033[0m"
+RUN echo -e "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+RUN echo -e "\nPHP\n"
+
 RUN php --version
 RUN php -r 'echo date_default_timezone_get();'
 
-RUN echo -e "\033[1;34m- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\t Composer:\n\033[0m"
+RUN echo -e "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+RUN echo -e "\nComposer:\n"
+
 RUN composer --version
 
-RUN echo -e "\033[1;34m- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\t PHPUnit:\n\033[0m"
+RUN echo -e "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+RUN echo -e "\nPHPUnit:\n"
+
 RUN phpunit --version
