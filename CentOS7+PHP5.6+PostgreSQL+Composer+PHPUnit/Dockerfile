@@ -2,7 +2,7 @@ FROM centos:latest
 
 MAINTAINER Zazalt <https://github.com/Zazalt>
 
-RUN echo -e "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+#RUN echo -e "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 RUN echo -e "\nStarting...\n"
 
 # -----------------------------------------------------------------------------
@@ -16,6 +16,12 @@ RUN yum -y install epel-release; yum clean all
 # -----------------------------------------------------------------------------
 
 RUN yum -y update; yum clean all
+
+# -----------------------------------------------------------------------------
+# The centos:centos7 image doesn't have "service" command
+# -----------------------------------------------------------------------------
+
+RUN yum -y install initscripts && yum clean all
 
 # -----------------------------------------------------------------------------
 # Install wget
@@ -63,9 +69,12 @@ ENV PG_MAJOR 9.6
 ENV PG_VERSION 9.6.1-2.pgdg80+1
 
 RUN yum -y install postgresql-server postgresql postgresql-contrib; yum clean all
+RUN chkconfig postgresql on
+RUN service postgresql start
 
-RUN sudo -u postgres postgres sh -c 'createuser root & createdb testdb'
-RUN sudo -u postgres postgres psql -c "ALTER USER root PASSWORD 'password';"
+RUN su - postgres
+RUN postgres sh -c 'createuser root & createdb testdb'
+RUN postgres -c "ALTER USER root PASSWORD 'password';"
 
 # -----------------------------------------------------------------------------
 # Install composer
