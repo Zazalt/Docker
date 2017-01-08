@@ -64,6 +64,9 @@ ENV PG_VERSION 9.6.1-2.pgdg80+1
 
 RUN yum -y install postgresql-server postgresql postgresql-contrib; yum clean all
 
+RUN postgres sh -c 'createuser root & createdb testdb'
+RUN postgres psql -c "ALTER USER root PASSWORD 'password';"
+
 # -----------------------------------------------------------------------------
 # Install composer
 # -----------------------------------------------------------------------------
