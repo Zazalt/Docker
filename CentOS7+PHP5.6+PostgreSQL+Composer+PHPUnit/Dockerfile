@@ -1,4 +1,4 @@
-FROM centos:latest
+FROM centos:centos7
 
 MAINTAINER Zazalt <https://github.com/Zazalt>
 
@@ -63,18 +63,37 @@ RUN sed -i \
 # -----------------------------------------------------------------------------
 # Install PostgreSQL
 # -----------------------------------------------------------------------------
-# https://github.com/CentOS/CentOS-Dockerfiles/blob/master/postgres/centos6/Dockerfile
+# https://github.com/CentOS/CentOS-Dockerfiles/blob/master/postgres/centos7/Dockerfile
 
-ENV PG_MAJOR 9.6
-ENV PG_VERSION 9.6.1-2.pgdg80+1
+RUN yum -y install sudo epel-release; yum clean all
+RUN yum -y install postgresql-server postgresql postgresql-contrib supervisor pwgen; yum clean all
 
-RUN yum -y install postgresql-server postgresql postgresql-contrib; yum clean all
-RUN chkconfig postgresql on
-RUN service postgresql start
+ADD ./postgresql-setup /usr/bin/postgresql-setup
+ADD ./supervisord.conf /etc/supervisord.conf
+ADD ./start_postgres.sh /start_postgres.sh
 
-RUN su - postgres
-RUN postgres sh -c 'createuser root & createdb testdb'
-RUN postgres -c "ALTER USER root PASSWORD 'password';"
+#Sudo requires a tty. fix that.
+RUN sed -i 's/.*requiretty$/#Defaults requiretty/' /etc/sudoers
+RUN chmod +x /usr/bin/postgresql-setup
+RUN chmod +x /start_postgres.sh
+
+RUN /usr/bin/postgresql-setup initdb
+
+ADD ./postgresql.conf /var/lib/pgsql/data/postgresql.conf
+
+RUN chown -v postgres.postgres /var/lib/pgsql/data/postgresql.conf
+
+RUN echo "host    all             all             0.0.0.0/0               md5" >> /var/lib/pgsql/data/pg_hba.conf
+
+VOLUME ["/var/lib/pgsql"]
+
+EXPOSE 5432
+
+#ENV POSTGRES_DB test
+#ENV POSTGRES_USER test
+#ENV POSTGRES_PASSWORD test
+
+CMD ["/bin/bash", "/start_postgres.sh"]
 
 # -----------------------------------------------------------------------------
 # Install composer
