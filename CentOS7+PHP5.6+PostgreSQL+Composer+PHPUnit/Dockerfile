@@ -54,11 +54,16 @@ RUN yum -y install \
     php56w-soap \
     php56w-mcrypt \
     php56w-pecl-memcache
-RUN sed -i \
-	-e 's/^short_open_tag = Off/short_open_tag = On/g' \
-	-e 's/;date.timezone =/date.timezone = UTC/g' \
-	-e 's/expose_php = On/expose_php = Off/g' \
-	/etc/php.ini
+
+#RUN sed -i \
+#	-e 's/^short_open_tag = Off/short_open_tag = On/g' \
+#	-e 's/;date.timezone =/date.timezone = UTC/g' \
+#	-e 's/expose_php = On/expose_php = Off/g' \
+#	/etc/php.ini
+
+ADD ./php.sh /php.sh
+RUN chmod +x /php.sh
+CMD ["/bin/bash", "/php.sh"]
 
 # -----------------------------------------------------------------------------
 # Install PostgreSQL

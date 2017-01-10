@@ -1,11 +1,11 @@
 #!/bin/bash
 
+echo "Run postgres.sh file"
+
 DB_NAME="test" #${POSTGRES_DB:-}
 DB_USER="test" #${POSTGRES_USER:-}
 DB_PASS="test" #${POSTGRES_PASSWORD:-}
 PG_CONFDIR="/var/lib/pgsql/data"
-
-echo "Start..."
 
 __create_user() {
   #Grant rights
