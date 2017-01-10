@@ -1,4 +1,4 @@
-FROM centos:centos7
+FROM centos:latest
 
 MAINTAINER Zazalt <https://github.com/Zazalt>
 
