@@ -9,13 +9,13 @@ RUN echo -e "\nStarting...\n"
 # Install Extra Packages for Enterprise Linux (epel)
 # -----------------------------------------------------------------------------
 
-RUN yum -y install epel-release; yum clean all
+RUN yum -y install epel-release && yum clean all
 
 # -----------------------------------------------------------------------------
 # Update yum
 # -----------------------------------------------------------------------------
 
-RUN yum -y update; yum clean all
+RUN yum -y update && yum clean all
 
 # -----------------------------------------------------------------------------
 # The centos:centos7 image doesn't have "service" command
@@ -27,13 +27,13 @@ RUN yum -y install initscripts && yum clean all
 # Install wget
 # -----------------------------------------------------------------------------
 
-RUN yum -y install wget
+RUN yum -y install wget && yum clean all
 
 # -----------------------------------------------------------------------------
 # Install GIT
 # -----------------------------------------------------------------------------
 
-RUN yum -y install git
+RUN yum -y install git && yum clean all
 
 # -----------------------------------------------------------------------------
 # Install PHP 5.6
@@ -55,6 +55,8 @@ RUN yum -y install \
     php56w-mcrypt \
     php56w-pecl-memcache
 
+RUN yum clean all
+
 #RUN sed -i \
 #	-e 's/^short_open_tag = Off/short_open_tag = On/g' \
 #	-e 's/;date.timezone =/date.timezone = UTC/g' \
@@ -70,8 +72,8 @@ RUN sh ./php.sh
 # -----------------------------------------------------------------------------
 # https://github.com/CentOS/CentOS-Dockerfiles/blob/master/postgres/centos7/Dockerfile
 
-RUN yum -y install sudo epel-release; yum clean all
-RUN yum -y install postgresql-server postgresql postgresql-contrib supervisor pwgen; yum clean all
+RUN yum -y install sudo epel-release && yum clean all
+RUN yum -y install postgresql-server postgresql postgresql-contrib supervisor pwgen && yum clean all
 
 ADD ./postgresql-setup /usr/bin/postgresql-setup
 ADD ./supervisord.conf /etc/supervisord.conf
