@@ -89,10 +89,6 @@ VOLUME ["/var/lib/pgsql"]
 
 EXPOSE 5432
 
-#ENV POSTGRES_DB test
-#ENV POSTGRES_USER test
-#ENV POSTGRES_PASSWORD test
-
 CMD ["/bin/bash", "/start_postgres.sh"]
 
 # -----------------------------------------------------------------------------

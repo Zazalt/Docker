@@ -1,9 +1,11 @@
 #!/bin/bash
 
-DB_NAME=test #${POSTGRES_DB:-}
-DB_USER=test #${POSTGRES_USER:-}
-DB_PASS=test #${POSTGRES_PASSWORD:-}
+DB_NAME="test" #${POSTGRES_DB:-}
+DB_USER="test" #${POSTGRES_USER:-}
+DB_PASS="test" #${POSTGRES_PASSWORD:-}
 PG_CONFDIR="/var/lib/pgsql/data"
+
+echo "Start..."
 
 __create_user() {
   #Grant rights
@@ -41,12 +43,5 @@ if [ -n "${DB_NAME}" ]; then
 fi
 }
 
-
-__run_supervisor() {
-supervisord -n
-}
-
 # Call all functions
 __create_user
-__run_supervisor
-
