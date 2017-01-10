@@ -63,7 +63,7 @@ RUN yum -y install \
 
 ADD ./php.sh /php.sh
 RUN chmod +x /php.sh
-CMD ["/bin/bash", "/php.sh"]
+RUN sh ./php.sh
 
 # -----------------------------------------------------------------------------
 # Install PostgreSQL
