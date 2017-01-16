@@ -1,22 +1,33 @@
-FROM ubuntu:latest
+FROM ubuntu:14.04
 
 MAINTAINER Zazalt <https://github.com/Zazalt>
 
+ENV DEBIAN_FRONTEND noninteractive
+
 #RUN echo -e "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 RUN echo -e "\nStarting...\n"
+
+# Set correct environment variables.
+#ENV HOME /root
+#ENV DEBIAN_FRONTEND noninteractive
+#ENV INITRD No
+
+# Our user in the container
+#USER root
+#WORKDIR /root
 
 # -----------------------------------------------------------------------------
 # Update
 # -----------------------------------------------------------------------------
 
-RUN sudo apt-get update && apt-get -f install
+#RUN sudo apt-get update && apt-get -f install
 
 # -----------------------------------------------------------------------------
 # Install wget
 # -----------------------------------------------------------------------------
 
-RUN sudo apt-get install wget
-RUN yum list installed | grep 'wget'
+#RUN sudo apt-get install wget
+#RUN yum list installed | grep 'wget'
 
 # -----------------------------------------------------------------------------
 # Install GIT
@@ -27,34 +38,29 @@ RUN yum list installed | grep 'wget'
 # -----------------------------------------------------------------------------
 # Install PHP 5.6
 # -----------------------------------------------------------------------------
-# https://webtatic.com/packages/php56/
 
-#RUN rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
-#RUN yum -y install \
-    php56w \
-    php56w-common \
-    php56w-mysqli \
-    php56w-curl \
-    php56w-opcache \
-    php56w-gd \
-    php56w-mbstring \
-    php56w-mcrypt \
-    php56w-pgsql \
-    php56w-soap \
-    php56w-mcrypt \
-    php56w-pecl-memcache
+RUN echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu trusty main" >> /etc/apt/sources.list && \
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-key E5267A6C && \
+    apt-get update
 
-#RUN yum clean all
+RUN apt-get -y install \
+    php5.6 \
+    php5.6-gd \
+    php5.6-ldap \
+    php5.6-sqlite \
+    php5.6-pgsql \
+    php5.6-mysql \
+    php5.6-mcrypt \
+    php5.6-xmlrpc \
+    php5.6-fpm \
+    php5.6-dom \
+    php5.6-xmlwriter
 
-#RUN sed -i \
-#	-e 's/^short_open_tag = Off/short_open_tag = On/g' \
-#	-e 's/;date.timezone =/date.timezone = UTC/g' \
-#	-e 's/expose_php = On/expose_php = Off/g' \
-#	/etc/php.ini
+#RUN find / -name 'php.ini'
 
-#ADD ./php.sh /php.sh
-#RUN chmod +x /php.sh
-#RUN sh ./php.sh
+ADD ./php.sh /php.sh
+RUN chmod +x /php.sh
+RUN sh ./php.sh
 
 # -----------------------------------------------------------------------------
 # Install PostgreSQL
@@ -102,23 +108,23 @@ RUN yum list installed | grep 'wget'
 #RUN mv phpunit.phar /usr/local/bin/phpunit
 #RUN phpunit --version
 
-RUN echo -e "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-RUN echo -e "\nOS\n"
+#RUN echo -e "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+#RUN echo -e "\nOS\n"
 
-RUN cat /etc/*-release
+#RUN cat /etc/*-release
 
-RUN echo -e "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-RUN echo -e "\nPHP\n"
+#RUN echo -e "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+#RUN echo -e "\nPHP\n"
 
-RUN php --version
-RUN php -r 'echo date_default_timezone_get();'
+#RUN php --version
+#RUN php -r 'echo date_default_timezone_get();'
 
-RUN echo -e "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-RUN echo -e "\nComposer:\n"
+#RUN echo -e "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+#RUN echo -e "\nComposer:\n"
 
-RUN composer --version
+#RUN composer --version
 
-RUN echo -e "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-RUN echo -e "\nPHPUnit:\n"
+#RUN echo -e "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+#RUN echo -e "\nPHPUnit:\n"
 
-RUN phpunit --version
+#RUN phpunit --version
