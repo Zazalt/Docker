@@ -21,7 +21,7 @@ if [ -n "${DB_USER}" ]; then
     DB_PASS=$(pwgen -c -n -1 12)
     echo "Password for \"${DB_USER}\" created as: \"${DB_PASS}\""
   fi
-    echo "Creating user \"${DB_USER}\" with password \"${DB_PASS}\" ..."
+    echo "Creating user \"${DB_USER}\"..."
     echo "CREATE ROLE ${DB_USER} with CREATEROLE login superuser PASSWORD '${DB_PASS}';" |
       sudo -u postgres -H postgres --single \
        -c config_file=${PG_CONFDIR}/postgresql.conf -D ${PG_CONFDIR}

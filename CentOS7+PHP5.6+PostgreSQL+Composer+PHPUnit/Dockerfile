@@ -86,50 +86,35 @@ RUN chmod +x /start_postgres.sh
 
 RUN /usr/bin/postgresql-setup initdb
 
+#RUN find / -name 'postgresql.conf'
+
 ADD ./postgresql.conf /var/lib/pgsql/data/postgresql.conf
 
 RUN chown -v postgres.postgres /var/lib/pgsql/data/postgresql.conf
 
 RUN echo "host    all             all             0.0.0.0/0               md5" >> /var/lib/pgsql/data/pg_hba.conf
+#RUN echo "host    all             all             127.0.0.1/0               md5" >> /var/lib/pgsql/data/pg_hba.conf
 
 VOLUME ["/var/lib/pgsql"]
 
 EXPOSE 5432
 
-CMD ["/bin/bash", "/start_postgres.sh"]
+RUN sh /start_postgres.sh
+
+#RUN /etc/init.d/postgresql start
+#RUN netstat -nlp | grep 5432
+#RUN service postgres status
+#RUN grep listen_addresses /var/lib/pgsql/data/postgresql.conf
+#RUN psql -U test -h 127.0.0.1
 
 # -----------------------------------------------------------------------------
-# Install composer
+
+#RUN service postgresql restart
+
 # -----------------------------------------------------------------------------
 
-RUN cd /tmp
-RUN curl -sS https://getcomposer.org/installer | php
-RUN mv composer.phar /usr/local/bin/composer
-#RUN composer --version
+#ADD ./test.php /test.php
+#RUN chmod +x /test.php
+#RUN php ./test.php
 
-# Install PHPUnit
-RUN wget https://phar.phpunit.de/phpunit.phar
-RUN chmod +x phpunit.phar
-RUN mv phpunit.phar /usr/local/bin/phpunit
-#RUN phpunit --version
-
-RUN echo -e "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-RUN echo -e "\nOS\n"
-
-RUN cat /etc/*-release
-
-RUN echo -e "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-RUN echo -e "\nPHP\n"
-
-RUN php --version
-RUN php -r 'echo date_default_timezone_get();'
-
-RUN echo -e "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-RUN echo -e "\nComposer:\n"
-
-RUN composer --version
-
-RUN echo -e "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-RUN echo -e "\nPHPUnit:\n"
-
-RUN phpunit --version
+#CMD ["/bin/bash", "/start_postgres.sh"]

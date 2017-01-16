@@ -8,4 +8,4 @@ sed -i \
 	-e 's/expose_php = On/expose_php = Off/g' \
 	/etc/php.ini
 
-php -r "echo date_default_timezone_get();"
+php -r 'echo date_default_timezone_get();'
