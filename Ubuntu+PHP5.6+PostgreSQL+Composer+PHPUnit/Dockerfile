@@ -76,7 +76,6 @@ RUN sh ./php.sh
 # -----------------------------------------------------------------------------
 # Install PostgreSQL
 # -----------------------------------------------------------------------------
-# https://github.com/CentOS/CentOS-Dockerfiles/blob/master/postgres/centos7/Dockerfile
 
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main" > /etc/apt/sources.list.d/pgdg.list
@@ -100,32 +99,6 @@ VOLUME  ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql"]
 
 USER postgres
 CMD ["/usr/lib/postgresql/9.3/bin/postgres", "-D", "/var/lib/postgresql/9.3/main", "-c", "config_file=/etc/postgresql/9.3/main/postgresql.conf"]
-
-#RUN yum -y install sudo epel-release && yum clean all
-#RUN yum -y install postgresql-server postgresql postgresql-contrib supervisor pwgen && yum clean all
-
-#ADD ./postgresql-setup /usr/bin/postgresql-setup
-#ADD ./supervisord.conf /etc/supervisord.conf
-#ADD ./start_postgres.sh /start_postgres.sh
-
-#Sudo requires a tty. fix that.
-#RUN sed -i 's/.*requiretty$/#Defaults requiretty/' /etc/sudoers
-#RUN chmod +x /usr/bin/postgresql-setup
-#RUN chmod +x /start_postgres.sh
-
-#RUN /usr/bin/postgresql-setup initdb
-
-#ADD ./postgresql.conf /var/lib/pgsql/data/postgresql.conf
-
-#RUN chown -v postgres.postgres /var/lib/pgsql/data/postgresql.conf
-
-#RUN echo "host    all             all             0.0.0.0/0               md5" >> /var/lib/pgsql/data/pg_hba.conf
-
-#VOLUME ["/var/lib/pgsql"]
-
-#EXPOSE 5432
-
-#CMD ["/bin/bash", "/start_postgres.sh"]
 
 # -----------------------------------------------------------------------------
 # Install composer
@@ -175,13 +148,3 @@ RUN echo -e "\n\n\t\t\t\t\t~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ PHPUnit ~ ~ ~ ~
 RUN phpunit --version
 
 RUN echo -e "\n\n\n\n\n"
-
-#RUN echo -e "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-#RUN echo -e "\nComposer:\n"
-
-#RUN composer --version
-
-#RUN echo -e "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-#RUN echo -e "\nPHPUnit:\n"
-
-#RUN phpunit --version
