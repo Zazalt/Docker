@@ -64,7 +64,8 @@ RUN apt-get -y install \
     php5.6-xmlrpc \
     php5.6-fpm \
     php5.6-dom \
-    php5.6-xmlwriter
+    php5.6-xmlwriter \
+    php5.6-zip
 
 #RUN find / -name 'php.ini'
 
