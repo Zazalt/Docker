@@ -23,25 +23,27 @@ RUN echo -e "\nStarting...\n"
 #RUN sudo apt-get update && apt-get -f install
 
 # -----------------------------------------------------------------------------
-# Install wget
+# Install wget (1.15)
 # -----------------------------------------------------------------------------
 
-#RUN sudo apt-get install wget
-#RUN yum list installed | grep 'wget'
+RUN  apt-get update \
+    && apt-get install -y wget \
+    && rm -rf /var/lib/apt/lists/*
 
 # -----------------------------------------------------------------------------
-# Install GIT
+# Install GIT (1.9.1)
 # -----------------------------------------------------------------------------
 
-#RUN yum -y install git && yum clean all
+RUN apt-get update \
+    && apt-get install -y git
 
 # -----------------------------------------------------------------------------
-# Install PHP 5.6
+# Install PHP (5.6.30)
 # -----------------------------------------------------------------------------
 
-RUN echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu trusty main" >> /etc/apt/sources.list && \
-    apt-key adv --keyserver keyserver.ubuntu.com --recv-key E5267A6C && \
-    apt-get update
+RUN echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu trusty main" >> /etc/apt/sources.list \
+    && apt-key adv --keyserver keyserver.ubuntu.com --recv-key E5267A6C \
+    && apt-get update
 
 RUN apt-get -y install \
     php5.6 \
@@ -66,6 +68,29 @@ RUN sh ./php.sh
 # Install PostgreSQL
 # -----------------------------------------------------------------------------
 # https://github.com/CentOS/CentOS-Dockerfiles/blob/master/postgres/centos7/Dockerfile
+
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main" > /etc/apt/sources.list.d/pgdg.list
+
+RUN apt-get update && apt-get -y -q install python-software-properties software-properties-common \
+    && apt-get -y -q install postgresql-9.3 postgresql-client-9.3 postgresql-contrib-9.3
+
+USER postgres
+RUN /etc/init.d/postgresql start \
+    && psql --command "CREATE USER pguser WITH SUPERUSER PASSWORD 'pguser';" \
+    && createdb -O pguser pgdb
+
+USER root
+RUN echo "host all  all    0.0.0.0/0  md5" >> /etc/postgresql/9.3/main/pg_hba.conf
+RUN echo "listen_addresses='*'" >> /etc/postgresql/9.3/main/postgresql.conf
+
+EXPOSE 5432
+
+RUN mkdir -p /var/run/postgresql && chown -R postgres /var/run/postgresql
+VOLUME  ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql"]
+
+USER postgres
+CMD ["/usr/lib/postgresql/9.3/bin/postgres", "-D", "/var/lib/postgresql/9.3/main", "-c", "config_file=/etc/postgresql/9.3/main/postgresql.conf"]
 
 #RUN yum -y install sudo epel-release && yum clean all
 #RUN yum -y install postgresql-server postgresql postgresql-contrib supervisor pwgen && yum clean all
@@ -108,16 +133,25 @@ RUN sh ./php.sh
 #RUN mv phpunit.phar /usr/local/bin/phpunit
 #RUN phpunit --version
 
-#RUN echo -e "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-#RUN echo -e "\nOS\n"
+# -----------------------------------------------------------------------------
+# Checkpoints
+# -----------------------------------------------------------------------------
 
-#RUN cat /etc/*-release
+RUN echo -e "\n\n\t\t\t\t\t~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ OS ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n\n"
+RUN cat /etc/*-release
 
-#RUN echo -e "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
-#RUN echo -e "\nPHP\n"
+RUN echo -e "\n\n\t\t\t\t\t~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ WGET ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n\n"
+RUN wget --version
 
-#RUN php --version
-#RUN php -r 'echo date_default_timezone_get();'
+RUN echo -e "\n\n\t\t\t\t\t~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ GIT ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n\n"
+RUN git --version
+
+RUN echo -e "\n\n\t\t\t\t\t~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ PHP ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n\n"
+
+RUN php --version
+RUN php -r 'echo date_default_timezone_get();'
+
+RUN echo -e "\n\n\n\n\n"
 
 #RUN echo -e "\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
 #RUN echo -e "\nComposer:\n"
