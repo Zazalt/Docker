@@ -13,7 +13,8 @@ RUN echo -e "\nStarting...\n"
 #ENV INITRD No
 
 # Our user in the container
-#USER root
+USER root
+
 #WORKDIR /root
 
 # -----------------------------------------------------------------------------
@@ -29,6 +30,13 @@ RUN echo -e "\nStarting...\n"
 RUN  apt-get update \
     && apt-get install -y wget \
     && rm -rf /var/lib/apt/lists/*
+
+# -----------------------------------------------------------------------------
+# Install CURL
+# -----------------------------------------------------------------------------
+
+RUN apt-get update \
+    && apt-get -y install curl
 
 # -----------------------------------------------------------------------------
 # Install GIT (1.9.1)
@@ -122,16 +130,19 @@ CMD ["/usr/lib/postgresql/9.3/bin/postgres", "-D", "/var/lib/postgresql/9.3/main
 # Install composer
 # -----------------------------------------------------------------------------
 
-#RUN cd /tmp
-#RUN curl -sS https://getcomposer.org/installer | php
-#RUN mv composer.phar /usr/local/bin/composer
-#RUN composer --version
+USER root
+RUN apt-get -y autoremove && apt-get clean && apt-get autoclean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Install PHPUnit
-#RUN wget https://phar.phpunit.de/phpunit.phar
-#RUN chmod +x phpunit.phar
-#RUN mv phpunit.phar /usr/local/bin/phpunit
-#RUN phpunit --version
+RUN curl https://getcomposer.org/installer | php -- && mv composer.phar /usr/local/bin/composer && chmod +x /usr/local/bin/composer
+
+# -----------------------------------------------------------------------------
+# Install PHPUnit (5.7.9)
+# -----------------------------------------------------------------------------
+
+RUN wget https://phar.phpunit.de/phpunit.phar
+RUN chmod +x phpunit.phar
+RUN mv phpunit.phar /usr/local/bin/phpunit
 
 # -----------------------------------------------------------------------------
 # Checkpoints
@@ -143,6 +154,9 @@ RUN cat /etc/*-release
 RUN echo -e "\n\n\t\t\t\t\t~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ WGET ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n\n"
 RUN wget --version
 
+RUN echo -e "\n\n\t\t\t\t\t~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ CURL ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n\n"
+RUN curl --version
+
 RUN echo -e "\n\n\t\t\t\t\t~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ GIT ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n\n"
 RUN git --version
 
@@ -150,6 +164,14 @@ RUN echo -e "\n\n\t\t\t\t\t~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ PHP ~ ~ ~ ~ ~ ~
 
 RUN php --version
 RUN php -r 'echo date_default_timezone_get();'
+
+RUN echo -e "\n\n\t\t\t\t\t~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ COMPOSER ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n\n"
+
+RUN composer --version
+
+RUN echo -e "\n\n\t\t\t\t\t~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ PHPUnit ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n\n"
+
+RUN phpunit --version
 
 RUN echo -e "\n\n\n\n\n"
 
