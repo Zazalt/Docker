@@ -1,6 +1,8 @@
----
-  sudo: required
-  services:
-    - docker
-  script:
-    - ./test.sh
+#  sudo: required
+#  services:
+#    - docker
+#  script:
+#    - ./test.sh
+  script: true
+  after_script:
+   - curl --data "build=true" -X POST https://registry.hub.docker.com/u/zazalt/docker/trigger/948afec2-62b6-40ae-9136-0cc8d6dcbb31/
