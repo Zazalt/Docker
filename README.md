@@ -13,7 +13,8 @@
 ##### Will install
 * Ubuntu 14.04
 * wget 1.15
-* curl
+* curl 7.35.0
+* screen 4.01
 * git 1.9.1
 * PHP 5.6.30
 * PostgreSQL ( username: `zazalt`, password: `zazalt`, db: `zazaltdb`)
