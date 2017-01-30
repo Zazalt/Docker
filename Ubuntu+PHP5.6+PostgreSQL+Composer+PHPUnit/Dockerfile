@@ -150,3 +150,12 @@ RUN echo -e "\n\n\t\t\t\t\t~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ PHPUnit ~ ~ ~ ~
 RUN phpunit --version
 
 RUN echo -e "\n\n\n\n\n"
+
+# Cleanup
+RUN  apt-get clean && \
+    rm -rf \
+    /var/lib/apt/lists/* \
+    /tmp/* \
+    /var/tmp/* && \
+
+RUN echo -e "\n\n\n\n\n"
