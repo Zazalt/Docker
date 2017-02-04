@@ -6,20 +6,14 @@
 
 [![Travis CI](https://travis-ci.org/Zazalt/Docker.svg?branch=master)](https://travis-ci.org/Zazalt/Docker)
 
-##### Docker Pull Command
-
-`docker pull zazalt/docker:ubuntu`
 
 ##### Will install
-* Ubuntu 14.04
 * wget 1.15
 * curl 7.35.0
 * screen 4.01
 * git 1.9.1
-* PHP 5.6.30
 * PostgreSQL ( username: `zazalt`, password: `zazalt`, db: `zazaltdb`)
 * Composer
-* PHPUnit 5.7.9
 
 
 | Docker Pull Command                | OS            | PHP    | MySQL | PostgreSQL |
