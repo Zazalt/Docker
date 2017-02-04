@@ -20,3 +20,8 @@
 * PostgreSQL ( username: `zazalt`, password: `zazalt`, db: `zazaltdb`)
 * Composer
 * PHPUnit 5.7.9
+
+
+| Docker Pull Command              | OS            | PHP    |
+| -------------------------------- |:--------------| -------|
+| docker pull zazalt/docker:alpha  |; Ubuntu 14.01 | 5.6.30 |
