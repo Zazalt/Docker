@@ -1,7 +1,5 @@
 # Zazalt Docker
 
-### Ubuntu+PHP5.6+PostgreSQL+Composer+PHPUnit
-
 [![Docker HUB Repository](http://dockeri.co/image/zazalt/docker)](https://hub.docker.com/r/zazalt/docker/)
 
 [![Travis CI](https://travis-ci.org/Zazalt/Docker.svg?branch=master)](https://travis-ci.org/Zazalt/Docker)
