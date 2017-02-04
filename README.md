@@ -22,6 +22,6 @@
 * PHPUnit 5.7.9
 
 
-| Docker Pull Command              | OS            | PHP    |
-| -------------------------------- |:--------------| -------|
-| docker pull zazalt/docker:alpha  |; Ubuntu 14.01 | 5.6.30 |
+| Docker Pull Command                | OS            | PHP    | MySQL | PostgreSQL |
+| ---------------------------------- |---------------| -------| ----- | ---------- |
+| `docker pull zazalt/docker:alpha`  | Ubuntu 14.01  | 5.6.30 | N/A   | x.y.z      |
