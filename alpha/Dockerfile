@@ -131,9 +131,9 @@ RUN curl https://getcomposer.org/installer | php -- && mv composer.phar /usr/loc
 # Install PHPUnit (5.7.9)
 # ----------------------------------------------------------------------------------------------------------------------
 
-RUN wget https://phar.phpunit.de/phpunit.phar
-RUN chmod +x phpunit.phar
-RUN mv phpunit.phar /usr/local/bin/phpunit
+RUN wget https://phar.phpunit.de/phpunit-5.7.9.phar
+RUN chmod +x phpunit-5.7.9.phar
+RUN mv phpunit-5.7.9.phar /usr/local/bin/phpunit
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Checkpoints
