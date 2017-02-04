@@ -17,5 +17,5 @@
 | Docker Pull Command                | OS            | PHP    | MySQL | PostgreSQL |
 | ---------------------------------- |---------------| -------| ----- | ---------- |
 | `docker pull zazalt/docker:alpha`  | Ubuntu 14.01  | 5.6.30 | N/A   | 9.3        |
-| `not available yet`                | Ubuntu 14.01  | 7.0    | N/A   | 9.3        |
-| `not available yet`                | Ubuntu 14.01  | 7.1    | N/A   | 9.3        |
+| `not available yet`                | Ubuntu 14.01  | 7.0    | 5.6   | 9.3        |
+| `not available yet`                | Ubuntu 14.01  | 7.1    | 5.6   | 9.3        |
