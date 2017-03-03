@@ -69,6 +69,7 @@ RUN echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu trusty main" >> /etc/ap
 
 RUN apt-get -y install \
     php5.6 \
+    php5.6-bcmath \
     php5.6-gd \
     php5.6-ldap \
     php5.6-sqlite \
