@@ -4,7 +4,7 @@
 
 [![Travis CI](https://travis-ci.org/Zazalt/Docker.svg?branch=master)](https://travis-ci.org/Zazalt/Docker)
 
-Those Docker images are specially designed to work with Bitbucket Pipeline
+Those Docker images are specially designed to work with [Bitbucket Pipeline](https://bitbucket.org/product/features/pipelines)
 
 `bitbucket-pipelines.yml` example:
 
@@ -15,7 +15,13 @@ pipelines:
     default:
         - step:
             script:
+                # Start the PostgreSQL
+                - /etc/init.d/postgresql start
+                
+                # Run (php) composer install
                 - composer install
+                
+                # Run phpunit
                 - phpunit
 ```
 
