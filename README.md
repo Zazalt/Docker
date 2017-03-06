@@ -15,8 +15,14 @@ pipelines:
     default:
         - step:
             script:
-                # Start the PostgreSQL
+                # PostgreSQL - start it
                 - /etc/init.d/postgresql start
+                
+                # MySQL - start it and create a new user and database
+                - /etc/init.d/mysql start
+                - mysql -uroot -e "CREATE DATABASE zazalt COLLATE 'utf8_unicode_ci'"
+                - mysql -uroot -e "CREATE USER 'zazalt'@'localhost'"
+                - mysql -uroot -e "GRANT ALL PRIVILEGES ON *.* TO 'zazalt'@'localhost' WITH GRANT OPTION"
                 
                 # Run (php) composer install
                 - composer install
