@@ -39,6 +39,14 @@ RUN apt-get update \
     && apt-get -y install curl
 
 # ----------------------------------------------------------------------------------------------------------------------
+# Install UNZIP
+# ----------------------------------------------------------------------------------------------------------------------
+
+RUN apt-get update && \
+    apt-get install -y \
+        unzip
+
+# ----------------------------------------------------------------------------------------------------------------------
 # Install screen
 # ----------------------------------------------------------------------------------------------------------------------
 
@@ -120,6 +128,34 @@ USER postgres
 CMD ["/usr/lib/postgresql/9.3/bin/postgres", "-D", "/var/lib/postgresql/9.3/main", "-c", "config_file=/etc/postgresql/9.3/main/postgresql.conf"]
 
 # ----------------------------------------------------------------------------------------------------------------------
+# Install MySQL (5.6.33)
+# ----------------------------------------------------------------------------------------------------------------------
+
+USER root
+
+#RUN debconf-set-selections <<< 'mysql-server mysql-server/root_password password zazalt'
+#RUN debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password zazalt'
+
+RUN apt-get update
+RUN apt-get -y install mysql-server
+
+#RUN echo "mysql-server-5.6 mysql-server/root_password password root" | sudo debconf-set-selections
+#RUN echo "mysql-server-5.6 mysql-server/root_password_again password root" | sudo debconf-set-selections
+#RUN apt-get -y install mysql-server-5.6
+
+#RUN /etc/init.d/mysql restart
+
+# Run the MySQL Secure Installation wizard
+#RUN mysql_secure_installation
+
+#RUN sed -i 's/127\.0\.0\.1/0\.0\.0\.0/g' /etc/mysql/my.cnf
+RUN sed -i -e"s/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
+
+#RUN mysql -uroot -p -e 'USE mysql; UPDATE `user` SET `Host`="%" WHERE `User`="root" AND `Host`="localhost"; DELETE FROM `user` WHERE `Host` != "%" AND `User`="root"; FLUSH PRIVILEGES;'
+
+EXPOSE 3306
+
+# ----------------------------------------------------------------------------------------------------------------------
 # Install composer
 # ----------------------------------------------------------------------------------------------------------------------
 
@@ -150,6 +186,9 @@ RUN wget --version
 RUN echo -e "\n\n\t\t\t\t\t~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ CURL ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n\n"
 RUN curl --version
 
+RUN echo -e "\n\n\t\t\t\t\t~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ UNZIP ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n\n"
+RUN unzip -v
+
 RUN echo -e "\n\n\t\t\t\t\t~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ GIT ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n\n"
 RUN git --version
 
@@ -159,6 +198,9 @@ RUN supervisord --version
 RUN echo -e "\n\n\t\t\t\t\t~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ PHP ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n\n"
 RUN php --version
 RUN php -r 'echo date_default_timezone_get();'
+
+RUN echo -e "\n\n\t\t\t\t\t~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ MYSQL ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n\n"
+RUN mysql --version
 
 RUN echo -e "\n\n\t\t\t\t\t~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ COMPOSER ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n\n"
 RUN composer --version

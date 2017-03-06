@@ -8,6 +8,7 @@
 ##### Will install
 * wget 1.15
 * curl 7.35.0
+* unzip 6.00
 * screen 4.01
 * git 1.9.1
 * PostgreSQL ( username: `zazalt`, password: `zazalt`, db: `zazaltdb`)
