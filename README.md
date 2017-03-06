@@ -15,7 +15,7 @@ pipelines:
     default:
         - step:
             script:
-                # PostgreSQL - start it
+                # PostgreSQL - start it. You can use - username: zazalt, password: zazalt, db: zazaltdb
                 - /etc/init.d/postgresql start
                 
                 # MySQL - start it and create a new user and database
