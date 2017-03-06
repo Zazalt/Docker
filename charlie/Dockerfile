@@ -81,32 +81,32 @@ RUN apt-get update
 
 RUN apt-get -y install \
     php7.0 \
-    php7.0-bcmath \
-    php7.0-gd \
-    php7.0-ldap \
-    php7.0-sqlite \
-    php7.0-pgsql \
-    php7.0-mysql \
-    php7.0-mcrypt \
-    php7.0-xmlrpc \
-    php7.0-fpm \
-    php7.0-mbstring \
-    php7.0-dom \
-    php7.0-xmlwriter \
-    php7.0-zip \
-    php7.0-xdebug
+    php7.1-bcmath \
+    php7.1-gd \
+    php7.1-ldap \
+    php7.1-sqlite \
+    php7.1-pgsql \
+    php7.1-mysql \
+    php7.1-mcrypt \
+    php7.1-xmlrpc \
+    php7.1-fpm \
+    php7.1-mbstring \
+    php7.1-dom \
+    php7.1-xmlwriter \
+    php7.1-zip \
+    php7.1-xdebug
 
 RUN sed -i \
     -e 's/^short_open_tag = Off/short_open_tag = On/g' \
     -e 's/;date.timezone =/date.timezone = UTC/g' \
     -e 's/expose_php = On/expose_php = Off/g' \
-    /etc/php/7.0/cli/php.ini
+    /etc/php/7.1/cli/php.ini
 
 RUN sed -i \
 	-e 's/^short_open_tag = Off/short_open_tag = On/g' \
 	-e 's/;date.timezone =/date.timezone = UTC/g' \
 	-e 's/expose_php = On/expose_php = Off/g' \
-	/etc/php/7.0/fpm/php.ini
+	/etc/php/7.1/fpm/php.ini
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Install PostgreSQL
