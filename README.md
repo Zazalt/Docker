@@ -4,6 +4,20 @@
 
 [![Travis CI](https://travis-ci.org/Zazalt/Docker.svg?branch=master)](https://travis-ci.org/Zazalt/Docker)
 
+Those Docker images are specially designed to work with Bitbucket Pipeline
+
+`bitbucket-pipelines.yml` example:
+
+```ymp
+image: zazalt/docker:alpha
+
+pipelines:
+    default:
+        - step:
+            script:
+                - composer install
+                - phpunit
+```
 
 ##### Will install
 * wget 1.15
