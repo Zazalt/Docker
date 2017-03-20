@@ -68,7 +68,7 @@ RUN apt-get update \
     && apt-get install -y supervisor
 
 # ----------------------------------------------------------------------------------------------------------------------
-# Install PHP (7.0.16)
+# Install PHP (7.1.3)
 # ----------------------------------------------------------------------------------------------------------------------
 
 RUN apt-get -y install \
@@ -109,7 +109,7 @@ RUN sed -i \
 	/etc/php/7.1/fpm/php.ini
 
 # ----------------------------------------------------------------------------------------------------------------------
-# Install PostgreSQL
+# Install PostgreSQL (9.3.16)
 # ----------------------------------------------------------------------------------------------------------------------
 # https://www.andreagrandi.it/2015/02/21/how-to-create-a-docker-image-for-postgresql-and-persist-data/
 # Create user [zazalt] with password [zazalt], and a database [zazaltdb]
@@ -176,12 +176,12 @@ RUN apt-get -y autoremove && apt-get clean && apt-get autoclean && \
 RUN curl https://getcomposer.org/installer | php -- && mv composer.phar /usr/local/bin/composer && chmod +x /usr/local/bin/composer
 
 # ----------------------------------------------------------------------------------------------------------------------
-# Install PHPUnit (6.0.8)
+# Install PHPUnit (6.0.10)
 # ----------------------------------------------------------------------------------------------------------------------
 
-RUN wget https://phar.phpunit.de/phpunit-6.0.8.phar
-RUN chmod +x phpunit-6.0.8.phar
-RUN mv phpunit-6.0.8.phar /usr/local/bin/phpunit
+RUN wget https://phar.phpunit.de/phpunit-6.0.10.phar
+RUN chmod +x phpunit-6.0.10.phar
+RUN mv phpunit-6.0.10.phar /usr/local/bin/phpunit
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Checkpoints

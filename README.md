@@ -37,12 +37,13 @@ pipelines:
 * unzip 6.00
 * screen 4.01
 * git 1.9.1
+* supervisor 3.0b2
 * PostgreSQL ( username: `zazalt`, password: `zazalt`, db: `zazaltdb`)
-* Composer
+* Composer 1.4.1
 
 
 | Docker Build            | OS            | PHP    | PHPUnit | MySQL  | PostgreSQL |
 | ----------------------- |---------------| -------| ------- | ------ | ---------- |
 | `zazalt/docker:alpha`   | Ubuntu 14.01  | 5.6.30 | 5.7.9   | 5.5.54 | 9.3        |
-| `zazalt/docker:bravo`   | Ubuntu 14.01  | 7.0.16 | 6.0.8   | 5.5.54 | 9.3        |
-| `zazalt/docker:charlie` | Ubuntu 14.01  | 7.1.2  | 6.0.8   | 5.5.54 | 9.3        |
+| `zazalt/docker:bravo`   | Ubuntu 14.01  | 7.0.17 | 6.0.10  | 5.5.54 | 9.3        |
+| `zazalt/docker:charlie` | Ubuntu 14.01  | 7.1.3  | 6.0.10  | 5.5.54 | 9.3        |
