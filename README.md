@@ -44,6 +44,6 @@ pipelines:
 
 | Docker Build            | OS            | PHP    | PHPUnit | MySQL  | PostgreSQL | Build |
 | ----------------------- |---------------| -------| ------- | ------ | ---------- | ----- |
-| `zazalt/docker:alpha`   | Ubuntu 14.01  | 5.6.30 | 5.7.19  | 5.5.54 | 9.3        | [![Hub Docker Build](https://img.shields.io/badge/build-success-green.svg)](https://hub.docker.com/r/zazalt/docker/builds/) |
-| `zazalt/docker:bravo`   | Ubuntu 14.01  | 7.0.17 | 6.1.1   | 5.5.54 | 9.3        | [![Hub Docker Build](https://img.shields.io/badge/build-success-green.svg)](https://hub.docker.com/r/zazalt/docker/builds/) |
-| `zazalt/docker:charlie` | Ubuntu 14.01  | 7.1.3  | 6.1.1   | 5.5.54 | 9.3        | [![Hub Docker Build](https://img.shields.io/badge/build-success-green.svg)](https://hub.docker.com/r/zazalt/docker/builds/) |
+| `zazalt/docker:alpha`   | Ubuntu 14.01  | 5.6.30 | 5.7.19  | 5.5.54 | 9.3        | [![Hub Docker Build](https://img.shields.io/badge/build-success-brightgreen.svg)](https://hub.docker.com/r/zazalt/docker/builds/) |
+| `zazalt/docker:bravo`   | Ubuntu 14.01  | 7.0.17 | 6.1.1   | 5.5.54 | 9.3        | [![Hub Docker Build](https://img.shields.io/badge/build-success-brightgreen.svg)](https://hub.docker.com/r/zazalt/docker/builds/) |
+| `zazalt/docker:charlie` | Ubuntu 14.01  | 7.1.3  | 6.1.1   | 5.5.54 | 9.3        | [![Hub Docker Build](https://img.shields.io/badge/build-success-brightgreen.svg)](https://hub.docker.com/r/zazalt/docker/builds/) |
