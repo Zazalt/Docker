@@ -31,13 +31,13 @@ pipelines:
                 - phpunit
 ```
 
-# Zazalt Docker tags (versions)
+# Zazalt Docker image tags (versions)
 
-| Docker Build            | Size    | OS            | PHP    | PHPUnit | MySQL  | PostgreSQL | Hub Build |
-| ----------------------- |-------- | --------------| -------| ------- | ------ | ---------- | ----- |
-| `zazalt/docker:alpha`   | ~190 MB | Ubuntu 14.01  | 5.6.30 | 5.7.19  | 5.5.54 | 9.3        | [![Hub Docker Build](https://img.shields.io/badge/build-success-brightgreen.svg)](https://hub.docker.com/r/zazalt/docker/builds/) |
-| `zazalt/docker:bravo`   | ~195 MB | Ubuntu 14.01  | 7.0.17 | 6.1.1   | 5.5.54 | 9.3        | [![Hub Docker Build](https://img.shields.io/badge/build-success-brightgreen.svg)](https://hub.docker.com/r/zazalt/docker/builds/) |
-| `zazalt/docker:charlie` | ~195 MB | Ubuntu 14.01  | 7.1.3  | 6.1.1   | 5.5.54 | 9.3        | [![Hub Docker Build](https://img.shields.io/badge/build-success-brightgreen.svg)](https://hub.docker.com/r/zazalt/docker/builds/) |
+| Docker Build            | Size    | OS            | PHP    | PHPUnit | MySQL  | PostgreSQL* | Hub Build |
+| ----------------------- |-------- | --------------| -------| ------- | ------ | ----------- | ----- |
+| `zazalt/docker:alpha`   | ~190 MB | Ubuntu 14.04  | 5.6.30 | 5.7.19  | 5.5.54 | 9.3         | [![Hub Docker Build](https://img.shields.io/badge/build-success-brightgreen.svg)](https://hub.docker.com/r/zazalt/docker/builds/) |
+| `zazalt/docker:bravo`   | ~195 MB | Ubuntu 14.04  | 7.0.18 | 6.1.1   | 5.5.54 | 9.3         | [![Hub Docker Build](https://img.shields.io/badge/build-success-brightgreen.svg)](https://hub.docker.com/r/zazalt/docker/builds/) |
+| `zazalt/docker:charlie` | ~195 MB | Ubuntu 14.04  | 7.1.4  | 6.1.1   | 5.5.54 | 9.3         | [![Hub Docker Build](https://img.shields.io/badge/build-success-brightgreen.svg)](https://hub.docker.com/r/zazalt/docker/builds/) |
 
 ###### All Zazalt Docker images will install:
 * wget 1.15
@@ -46,5 +46,6 @@ pipelines:
 * screen 4.01
 * git 1.9.1
 * supervisor 3.0b2
-* PostgreSQL ( username: `zazalt`, password: `zazalt`, db: `zazaltdb`)
 * Composer 1.4.1
+
+** PostgreSQL is having default credentials: username: `zazalt`, password: `zazalt`, db: `zazaltdb`
