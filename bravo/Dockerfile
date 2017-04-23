@@ -166,7 +166,7 @@ RUN sed -i -e"s/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/" /etc/mysq
 EXPOSE 3306
 
 # ----------------------------------------------------------------------------------------------------------------------
-# Install composer
+# Install composer (1.4.1)
 # ----------------------------------------------------------------------------------------------------------------------
 
 USER root
@@ -178,12 +178,12 @@ RUN curl https://getcomposer.org/installer | php -- \
     && chmod +x /usr/local/bin/composer
 
 # ----------------------------------------------------------------------------------------------------------------------
-# Install PHPUnit (6.0.10)
+# Install PHPUnit (6.1.1)
 # ----------------------------------------------------------------------------------------------------------------------
 
-RUN wget https://phar.phpunit.de/phpunit-6.0.10.phar
-RUN chmod +x phpunit-6.0.10.phar
-RUN mv phpunit-6.0.10.phar /usr/local/bin/phpunit
+RUN wget https://phar.phpunit.de/phpunit-6.1.1.phar
+RUN chmod +x phpunit-6.1.1.phar
+RUN mv phpunit-6.1.1.phar /usr/local/bin/phpunit
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Checkpoints

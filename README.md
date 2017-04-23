@@ -44,6 +44,6 @@ pipelines:
 
 | Docker Build            | OS            | PHP    | PHPUnit | MySQL  | PostgreSQL |
 | ----------------------- |---------------| -------| ------- | ------ | ---------- |
-| `zazalt/docker:alpha`   | Ubuntu 14.01  | 5.6.30 | 5.7.9   | 5.5.54 | 9.3        |
-| `zazalt/docker:bravo`   | Ubuntu 14.01  | 7.0.17 | 6.0.10  | 5.5.54 | 9.3        |
-| `zazalt/docker:charlie` | Ubuntu 14.01  | 7.1.3  | 6.0.10  | 5.5.54 | 9.3        |
+| `zazalt/docker:alpha`   | Ubuntu 14.01  | 5.6.30 | 5.7.19  | 5.5.54 | 9.3        |
+| `zazalt/docker:bravo`   | Ubuntu 14.01  | 7.0.17 | 6.1.1   | 5.5.54 | 9.3        |
+| `zazalt/docker:charlie` | Ubuntu 14.01  | 7.1.3  | 6.1.1   | 5.5.54 | 9.3        |
