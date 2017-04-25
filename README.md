@@ -48,4 +48,4 @@ pipelines:
 * supervisor 3.0b2
 * Composer 1.4.1
 
-** PostgreSQL is having default credentials: username: `zazalt`, password: `zazalt`, db: `zazaltdb`
+** PostgreSQL has implicit credentials: username: `zazalt`, password: `zazalt`, db: `zazaltdb`
