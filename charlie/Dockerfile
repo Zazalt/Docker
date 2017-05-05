@@ -126,7 +126,15 @@ RUN /etc/init.d/postgresql start \
     && createdb -O zazalt zazaltdb
 
 USER root
-RUN echo "host all  all    0.0.0.0/0  md5" >> /etc/postgresql/9.3/main/pg_hba.conf
+
+# Login with password
+#RUN echo "host all  all    0.0.0.0/0  md5" >> /etc/postgresql/9.3/main/pg_hba.conf
+
+# Trusted login
+RUN echo "host    all             all             127.0.0.1/32            trust" >> /etc/postgresql/9.3/main/pg_hba.conf
+RUN echo "host    all             zazalt          127.0.0.1/32            trust" >> /etc/postgresql/9.3/main/pg_hba.conf
+RUN echo "host    all             all             ::1/128                 trust" >> /etc/postgresql/9.3/main/pg_hba.conf
+
 RUN echo "listen_addresses='*'" >> /etc/postgresql/9.3/main/postgresql.conf
 
 EXPOSE 5432
